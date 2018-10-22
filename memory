@@ -1,7 +1,7 @@
 #!/bin/bash
-echo $1
-echo Saving...
-ZSNES_PATH="/home/$USER/.zsnes"
+HOME_PATH="/home/$USER"
+ZSNES_PATH="${HOME_PATH}/.zsnes"
+ZSNES_BACKUP_PATH="${HOME_PATH}/.zsnes.bkp"
 ZSNES_REMOTE_ID=$(gdrive list | grep .zsnes | grep dir | awk '{print $1}')
 
 uploadFolder() {
@@ -20,10 +20,46 @@ updateFolder() {
   uploadFolder
 }
 
-if [ ${#ZSNES_REMOTE_ID} -ge 1 ]; then
-  echo folder found remote
-  updateFolder
-else
-  echo folder doesnt found remote
-  uploadFolder
+save() {
+  if [ ${#ZSNES_REMOTE_ID} -ge 1 ]; then
+    echo folder found remote
+    updateFolder
+  else
+    echo folder doesnt found remote
+    uploadFolder
+  fi
+}
+
+saveBackup() {
+  if [ -d $ZSNES_PATH ]; then
+    echo creating new backup folder...
+    cp -r $ZSNES_PATH $ZSNES_BACKUP_PATH
+  fi
+}
+
+createBackup() {
+  if [ -d $ZSNES_BACKUP_PATH ]; then
+    echo backup found...
+    echo removing backup folder...
+    rm -r $ZSNES_BACKUP_PATH
+    saveBackup
+  else
+    echo backup doesnt found...
+    saveBackup
+  fi
+}
+
+downloadFromRemote() {
+  echo downloading from remote...
+  gdrive download --path $HOME_PATH -r $ZSNES_REMOTE_ID --force
+  echo Done!
+}
+
+if [ $1 == save ]; then
+  echo saving...
+  save
+else 
+  echo restoring...
+  createBackup
+  downloadFromRemote
 fi
