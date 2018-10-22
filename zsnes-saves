@@ -1,0 +1,29 @@
+#!/bin/bash
+echo $1
+echo Saving...
+ZSNES_PATH="/home/$USER/.zsnes"
+ZSNES_REMOTE_ID=$(gdrive list | grep .zsnes | grep dir | awk '{print $1}')
+
+uploadFolder() {
+  echo uploading save remote...
+  gdrive upload -r $ZSNES_PATH
+}
+
+removeFolder() {
+  echo removing save remote ...
+  gdrive delete -r $ZSNES_REMOTE_ID
+}
+
+updateFolder() {
+  echo removing remote folder...
+  removeFolder
+  uploadFolder
+}
+
+if [ ${#ZSNES_REMOTE_ID} -ge 1 ]; then
+  echo folder found remote
+  updateFolder
+else
+  echo folder doesnt found remote
+  uploadFolder
+fi
