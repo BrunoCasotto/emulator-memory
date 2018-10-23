@@ -21,13 +21,21 @@ executar primeiro comando
 ```gdrive list```
 Nesse momento um link aparecera no terminal, abra o navegador com ele e de permissao para o aplicativo na sua conta gmail.
 
-# Utilizando o zsnes-memory
+# Utilizando o emulator-memory
 ```git clone https://github.com/BrunoCasotto/zsnes-memory.git```
 
-cd zsnes-memory
+entrar na pasta
+``cd zsnes-memory``
+instalar
+``` sudo install memory /usr/local/bin/emulator-memory```
 
 * para salvar o status do seu zsnes execute o comando:
-``` ./memory save ```
+``` emulator-memory save ```
 
 * para recuperar o status do seu zsnes execute o comando:
-``` ./memory restore ```
+``` emulator-memory restore ```
+
+* para salvar/recuperar o status de outro emuladores que tenham pastas escondidas na home do sistema utilize
+``` emulator-memory [nome_do_emularos] [restore/save] ```
+
+Obs: Quando o comando restore e executado uma pasta .[nome_do_emulador].bkp e criada no mesmo folder onde a nova versao foi atualizada, em caso de engano e so recuperar ela de la.
