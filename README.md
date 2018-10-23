@@ -27,17 +27,6 @@ Nesse momento um link aparecera no terminal, abra o navegador com ele e de permi
 entrar na pasta
 ``cd emulator-memory``
 instalar
-<<<<<<< HEAD
-``` sudo install memory /usr/local/bin/zsnes-memory```
-
-* para salvar o status do seu zsnes execute o comando:
-``` zsnes-memory save ```
-
-* para recuperar o status do seu zsnes execute o comando:
-``` zsnes-memory restore ```
-
-Obs: Quando o comando restore e executado uma pasta .zsnes.bkp e criada no mesmo folder onde a nova versao foi atualizada, em caso de engano e so recuperar ela de la.
-=======
 ``` sudo install memory /usr/local/bin/emulator-memory```
 
 * para salvar o status do seu zsnes execute o comando:
@@ -50,4 +39,3 @@ Obs: Quando o comando restore e executado uma pasta .zsnes.bkp e criada no mesmo
 ``` emulator-memory [nome_do_emularos] [restore/save] ```
 
 Obs: Quando o comando restore e executado uma pasta .[nome_do_emulador].bkp e criada no mesmo folder onde a nova versao foi atualizada, em caso de engano e so recuperar ela de la.
->>>>>>> update readme
