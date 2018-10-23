@@ -1,5 +1,5 @@
-# zsnes-memory
-Esse script tem o intuito de utilizar o gdrive (https://github.com/prasmussen/gdrive) para salvar/recuperar status do emulador zsne.
+# emulator-memory
+Esse script tem o intuito de utilizar o gdrive (https://github.com/prasmussen/gdrive) para salvar/recuperar status de emuladores no ubuntu.
 
 # Passos para configurar:
 Baixar o arquivo do gdocs
@@ -22,10 +22,10 @@ executar primeiro comando
 Nesse momento um link aparecera no terminal, abra o navegador com ele e de permissao para o aplicativo na sua conta gmail.
 
 # Utilizando o emulator-memory
-```git clone https://github.com/BrunoCasotto/zsnes-memory.git```
+```git clone https://github.com/BrunoCasotto/emulator-memory.git```
 
 entrar na pasta
-``cd zsnes-memory``
+``cd emulator-memory``
 instalar
 <<<<<<< HEAD
 ``` sudo install memory /usr/local/bin/zsnes-memory```
