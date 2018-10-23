@@ -36,6 +36,6 @@ instalar
 ``` emulator-memory restore ```
 
 * para salvar/recuperar o status de outro emuladores que tenham pastas escondidas na home do sistema utilize
-``` emulator-memory [nome_do_emularos] [restore/save] ```
+``` emulator-memory [nome_do_emulador] [restore/save] ```
 
 Obs: Quando o comando restore e executado uma pasta .[nome_do_emulador].bkp e criada no mesmo folder onde a nova versao foi atualizada, em caso de engano e so recuperar ela de la.
