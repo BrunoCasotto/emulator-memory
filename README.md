@@ -30,10 +30,10 @@ instalar
 ``` sudo install memory /usr/local/bin/emulator-memory```
 
 * para salvar o status do seu zsnes execute o comando:
-``` emulator-memory save ```
+``` emulator-memory zsnes save ```
 
 * para recuperar o status do seu zsnes execute o comando:
-``` emulator-memory restore ```
+``` emulator-memory zsnes restore ```
 
 * para salvar/recuperar o status de outro emuladores que tenham pastas escondidas na home do sistema utilize
 ``` emulator-memory [nome_do_emulador] [restore/save] ```
