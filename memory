@@ -1,27 +1,28 @@
 #!/bin/bash
+EMULATOR_NAME=$1;
+EMULATOR_ACTION=$2;
 HOME_PATH="/home/$USER"
-ZSNES_PATH="${HOME_PATH}/.zsnes"
-ZSNES_BACKUP_PATH="${HOME_PATH}/.zsnes.bkp"
-ZSNES_REMOTE_ID=$(gdrive list | grep .zsnes | grep dir | awk '{print $1}')
-
+EMULATOR_PATH="${HOME_PATH}/.${EMULATOR_NAME}"
+EMULATOR_BACKUP_PATH="${HOME_PATH}/.${EMULATOR_NAME}.bkp"
+EMULATOR_REMOTE_ID=$(gdrive list -m 500 | grep .${EMULATOR_NAME} | grep dir | awk '{print $1}')
+echo $EMULATOR_REMOTE_ID
 uploadFolder() {
   echo uploading save remote...
-  gdrive upload -r $ZSNES_PATH
+  gdrive upload -r $EMULATOR_PATH
 }
 
 removeFolder() {
   echo removing save remote ...
-  gdrive delete -r $ZSNES_REMOTE_ID
+  gdrive delete -r $EMULATOR_REMOTE_ID
 }
 
 updateFolder() {
-  echo removing remote folder...
   removeFolder
   uploadFolder
 }
 
 save() {
-  if [ ${#ZSNES_REMOTE_ID} -ge 1 ]; then
+  if [ ${#EMULATOR_REMOTE_ID} -ge 1 ]; then
     echo folder found remote
     updateFolder
   else
@@ -31,17 +32,17 @@ save() {
 }
 
 saveBackup() {
-  if [ -d $ZSNES_PATH ]; then
+  if [ -d $EMULATOR_PATH ]; then
     echo creating new backup folder...
-    cp -r $ZSNES_PATH $ZSNES_BACKUP_PATH
+    cp -r $EMULATOR_PATH $EMULATOR_BACKUP_PATH
   fi
 }
 
 createBackup() {
-  if [ -d $ZSNES_BACKUP_PATH ]; then
+  if [ -d $EMULATOR_BACKUP_PATH ]; then
     echo backup found...
     echo removing backup folder...
-    rm -r $ZSNES_BACKUP_PATH
+    rm -r $EMULATOR_BACKUP_PATH
     saveBackup
   else
     echo backup doesnt found...
@@ -51,15 +52,26 @@ createBackup() {
 
 downloadFromRemote() {
   echo downloading from remote...
-  gdrive download --path $HOME_PATH -r $ZSNES_REMOTE_ID --force
+  gdrive download --path $HOME_PATH -r $EMULATOR_REMOTE_ID --force
   echo Done!
 }
 
-if [ $1 == save ]; then
-  echo saving...
-  save
-else 
-  echo restoring...
-  createBackup
-  downloadFromRemote
+selectAction() {
+  if [ $EMULATOR_ACTION == save ]; then
+    echo saving...
+    save
+  else 
+    echo restoring...
+    createBackup
+    downloadFromRemote
+  fi
+}
+
+if [ ${#EMULATOR_NAME} -ge 1 ] && [ ${#EMULATOR_ACTION} -ge 1 ]; then
+  selectAction
+else
+  echo bad request
+  echo the parameter should be like: emulator-memory [emulator name] [save / restore]
 fi
+
+
